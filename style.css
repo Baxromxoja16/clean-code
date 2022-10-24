@@ -1,0 +1,82 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #ccc;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 23px;
+  color: #191919;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+}
+
+hr {
+  border: 1px solid #444;
+}
+
+form {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.add-main,
+.todo-main,
+.completed-main {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.todo-main .todo-item,
+.completed-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-main input {
+  width: 60%;
+  margin-right: 20px;
+}
+
+.completed-item span {
+  text-decoration: line-through;
+  color: rgb(139, 139, 139);
+  font-size: 18px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 700;
+  color: rgb(139, 139, 139);
+}
+
+.write {
+  width: 40%;
+  text-align: center;
+  font-size: 18px;
+  padding: 0;
+}
+
+input {
+  height: 30px;
+  border-radius: 10px;
+  border: 1px solid #555;
+  padding-left: 7px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.fa-regular {
+  cursor: pointer;
+}
