@@ -80,3 +80,15 @@ input:focus {
 .fa-regular {
   cursor: pointer;
 }
+
+@media (max-width: 999px) {
+  .container {
+    width: 600px;
+  }
+}
+
+@media (max-width: 599px) {
+  .container {
+    width: 300px;
+  }
+}
