@@ -59,7 +59,6 @@ label {
 }
 
 .write {
-  width: 40%;
   text-align: center;
   font-size: 18px;
   padding: 0;
@@ -79,6 +78,13 @@ input:focus {
 
 .fa-regular {
   cursor: pointer;
+}
+
+.edit-box {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 @media (max-width: 999px) {

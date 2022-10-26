@@ -1,12 +1,10 @@
+"use strict";
 const addLabel = document.querySelector(".add-label");
 const todoMain = document.querySelector(".todo-main");
 const add = document.querySelector("#add");
 const valueArr = [];
 
-// create input for edit
-const createInput = document.createElement("input");
-createInput.type = "text";
-
+// create element
 if (localStorage.getItem("value")) {
   const storage = JSON.parse(localStorage.getItem("value"));
   storage.forEach((x) => {
@@ -14,9 +12,11 @@ if (localStorage.getItem("value")) {
     todoMain.innerHTML += `
     <div class="todo-item">
         <input type="checkbox" id="">
-        <span class="write">${x}</span>
-        <label class="edit" for="">Edit</label>
-        <i class="fa-regular fa-circle-xmark"></i>
+        <div class="edit-box">
+          <span class="write">${x}</span>
+          <label class="edit" for="">Edit</label>
+        </div>
+        <i class="delete-todo fa-regular fa-circle-xmark"></i>
     </div>
     `;
   });
@@ -29,9 +29,11 @@ function addHandler(event) {
     todoMain.innerHTML += `
         <div class="todo-item">
             <input type="checkbox" id="">
-            <span class="write">${add.value}</span>
-            <label class="edit" for="">Edit</label>
-            <i class="fa-regular fa-circle-xmark"></i>
+            <div class="edit-box">
+              <span class="write">${add.value}</span>
+              <label class="edit" for="">Edit</label>
+            </div>
+            <i class="delete-todo fa-regular fa-circle-xmark"></i>
         </div>
         `;
 
@@ -40,25 +42,53 @@ function addHandler(event) {
     localStorage.setItem("value", JSON.stringify(valueArr));
 
     add.value = "";
-    
-    // const edit = document.querySelectorAll(".edit");
 
-    // edit.forEach((element) => {
-    //   console.log(element);
-    //   element.addEventListener("click", editHandler);
-    // });
+    const edit = document.querySelectorAll(".edit");
+
+    edit.forEach((element) => {
+      element.addEventListener("click", editHandler);
+    });
+  }
+
+  // delete element
+  const deleteIcon = document.querySelectorAll(".delete-todo");
+  deleteIcon.forEach((element) => {
+    element.addEventListener("click", deleteHandler);
+  });
+
+  function deleteHandler(param) {
+    this.parentNode.style.display = "none";
   }
 }
 
-// const edit = document.querySelectorAll(".edit");
+// edit element
+let edit = document.querySelectorAll(".edit");
+const span = document.querySelector(".write");
 
-// edit.forEach((element) => {
-//   element.addEventListener("click", editHandler);
-// });
+edit.forEach((element) => {
+  element.addEventListener("click", editHandler);
+});
 
-// function editHandler() {
-//   createInput.value;
-//   this.parentNode.removeChild(this.parentNode.children[1]);
-//   this.parentNode.replaceChild(createInput, this.parentNode.children[1]);
-//   console.log();
-// }
+function editHandler() {
+  this.parentNode.innerHTML = `
+    <input class="save-input" type="text" id="" value="${this.parentNode.childNodes[1].innerHTML}">
+    <label class="save" for="">Save</label>
+  `;
+
+  const save = document.querySelector(".save");
+  const saveInput = document.querySelector(".save-input");
+
+  save.addEventListener("click", saveHandler);
+
+  function saveHandler(e) {
+    this.parentNode.innerHTML = `
+    <span class="write">${saveInput.value}</span>
+    <label class="edit" for="">Edit</label>
+  `;
+
+    edit = document.querySelectorAll(".edit");
+    edit.forEach((element) => {
+      element.addEventListener("click", editHandler);
+    });
+  }
+}
